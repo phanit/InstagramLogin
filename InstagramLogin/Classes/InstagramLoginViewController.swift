@@ -64,20 +64,38 @@ open class InstagramLoginViewController: UIViewController {
     }
 
     private func setupProgressView() {
-        if let navBar = navigationController?.navigationBar {
-            let progressView = UIProgressView(progressViewStyle: .bar)
-            progressView.progress = 0.0
-            progressView.tintColor = progressViewTintColor
-
-            navBar.addSubview(progressView)
-
-            progressView.translatesAutoresizingMaskIntoConstraints = false
-            progressView.leadingAnchor.constraint(equalTo: navBar.leadingAnchor).isActive = true
-            progressView.trailingAnchor.constraint(equalTo: navBar.trailingAnchor).isActive = true
-            progressView.bottomAnchor.constraint(equalTo: navBar.bottomAnchor).isActive = true
-            progressView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-
-            self.progressView = progressView
+        if #available(iOS 11.0, *) {
+            if let navBar = navigationController?.navigationBar {
+                let progressView = UIProgressView(progressViewStyle: .bar)
+                progressView.progress = 0.0
+                progressView.tintColor = progressViewTintColor
+                
+                navBar.addSubview(progressView)
+                
+                progressView.translatesAutoresizingMaskIntoConstraints = false
+                progressView.leadingAnchor.constraint(equalTo: navBar.leadingAnchor).isActive = true
+                progressView.trailingAnchor.constraint(equalTo: navBar.trailingAnchor).isActive = true
+                progressView.bottomAnchor.constraint(equalTo: navBar.bottomAnchor).isActive = true
+                progressView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+                
+                self.progressView = progressView
+            }
+        }else{
+            if let navBar = navigationController?.view {
+                let progressView = UIProgressView(progressViewStyle: .bar)
+                progressView.progress = 0.0
+                progressView.tintColor = progressViewTintColor
+                
+                navBar.addSubview(progressView)
+                
+                progressView.translatesAutoresizingMaskIntoConstraints = false
+                progressView.leadingAnchor.constraint(equalTo: navBar.leadingAnchor).isActive = true
+                progressView.trailingAnchor.constraint(equalTo: navBar.trailingAnchor).isActive = true
+                progressView.bottomAnchor.constraint(equalTo: navBar.topAnchor, constant: 64).isActive = true
+                progressView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+                
+                self.progressView = progressView
+            }
         }
     }
 
